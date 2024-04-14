@@ -9,27 +9,38 @@ public class CharacterMove : MonoBehaviour
     public int RunSpeed =10;
     public float maxPosition = 3.43f; // Maksimum konum
     public float minPosition = -3.43f; // Min konum
+    public int JumpForce = 2;
+    private Rigidbody rb;
+    Player player;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GetComponent<Player>();
+        // Rigidbody bileşenini al
+        rb = GetComponent<Rigidbody>();
 
-        
     }
-    void AnimationControl(string animationName)
+    public void AnimationControl(string animationName)
     {
         animator.SetBool("Run", false);
         //animator.SetBool("RightRun", false);
         //animator.SetBool("LeftRun", false);
-        animator.SetBool("Idle", false);
+       // animator.SetBool("Idle", false);
         animator.SetBool("Slide", false);
         animator.SetBool("Die", false);
         animator.SetBool(animationName, true);
+        Debug.Log("çalışı");
     }
 
     // Update is called once per frame
     void  Update()
     {
+        if (player.IsDie || player.IsFinish)
+        {
+            return;
+        }
+        
         transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * RunSpeed);
         //bastığım sürece çalışsın basılı kaldığımda
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -68,7 +79,9 @@ public class CharacterMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             animator.SetTrigger("Jump");
-           
+            // Rigidbody'ye yukarı doğru bir kuvvet uygula
+            rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
@@ -77,8 +90,12 @@ public class CharacterMove : MonoBehaviour
         
         else if (Input.anyKey == false)
         {
-            AnimationControl("Idle");
-       
+            // AnimationControl("Idle");
+            AnimationControl("Run");
+
         }
+        
     }
+   
+    
 }

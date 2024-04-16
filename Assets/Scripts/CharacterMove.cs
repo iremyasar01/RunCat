@@ -9,13 +9,15 @@ public class CharacterMove : MonoBehaviour
     public int RunSpeed =10;
     public float maxPosition = 3.43f; // Maksimum konum
     public float minPosition = -3.43f; // Min konum
-    public int JumpForce = 2;
+    //public int JumpForce = 2;
+    public float JumpHeight = 1;
     private Rigidbody rb;
     Player player;
 
     // Start is called before the first frame update
     void Start()
     {
+       
         player = GetComponent<Player>();
         // Rigidbody bileşenini al
         rb = GetComponent<Rigidbody>();
@@ -30,7 +32,7 @@ public class CharacterMove : MonoBehaviour
         animator.SetBool("Slide", false);
         animator.SetBool("Die", false);
         animator.SetBool(animationName, true);
-        Debug.Log("çalışı");
+   
     }
 
     // Update is called once per frame
@@ -80,7 +82,9 @@ public class CharacterMove : MonoBehaviour
         {
             animator.SetTrigger("Jump");
             // Rigidbody'ye yukarı doğru bir kuvvet uygula
-            rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+            //rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+            player.transform.DOMoveY(JumpHeight, 0.5f).SetEase(Ease.OutFlash);
+            player.transform.DOMoveY(0.5f, 0.75f).SetDelay(0.5f).SetEase(Ease.InFlash);
 
         }
         if (Input.GetKey(KeyCode.DownArrow))

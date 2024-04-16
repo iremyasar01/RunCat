@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public bool IsDie, IsFinish;
+    public bool IsDie, IsFinish, IsMagnetActive;
     public Animator animator;
     public CharacterMove CharacterMove;
+    
     private void Awake()
     {
         CharacterMove = GetComponent<CharacterMove>();
@@ -28,6 +29,12 @@ public class Player : MonoBehaviour
         {
             IsFinish = true;
             //CharacterMove.RunSpeed = 0;
+        }
+        if (other.CompareTag("Collectible"))
+        {
+            Debug.Log("coin arttır");
+            Debug.Log("destroy et");
+
         }
     }
     

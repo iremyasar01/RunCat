@@ -56,4 +56,5 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    //su anda bi next level olmadığından ötürü yenince de yenilince de baştan alıyor.
 }

@@ -22,6 +22,7 @@ public class Collectible : MonoBehaviour
             //if ((transform.position.z - player.transform.position.z) < 2)
             {
                 magneting = true;
+       
                 //StartCoroutine(ToParent());
             }
         }

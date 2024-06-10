@@ -8,11 +8,13 @@ public class Player : MonoBehaviour
     public Animator animator;
     public CharacterMove CharacterMove;
     public UIManager uimanager;
+    public ScoreManager scoreManager;
 
     private void Awake()
     {
         CharacterMove = GetComponent<CharacterMove>();
         uimanager = GameObject.Find("GameManager").GetComponent<UIManager>();
+        scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
     }
     // Start is called before the first frame update
     void Start()
@@ -30,13 +32,15 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Finish"))
         {
             IsFinish = true;
-            Invoke(nameof(WinCondition), 1);
+            Invoke(nameof(WinCondition), 0.2f);
             //CharacterMove.RunSpeed = 0;
         }
         if (other.CompareTag("Collectible"))
         {
             if (other.GetComponent<Collectible>().cType == Collectible.CollectibleType.Bones)
             {
+                scoreManager.UpdateBonesScore();
+                Destroy(other.gameObject);
                 Debug.Log("coin arttır");
                 Debug.Log("destroy et");
             }

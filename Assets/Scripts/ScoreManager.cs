@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public TextMeshProUGUI CoinText;
+    public int BonesCount;
+    UIManager uimanager;
+
+    public void Awake()
     {
-        
+        uimanager = GetComponent<UIManager>();
+    }
+    private void Start()
+    {
+        BonesCount = 0;
+        CoinText.text = BonesCount.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateBonesScore()
     {
-        
+        BonesCount++;
+       CoinText.text = BonesCount.ToString();
     }
 }

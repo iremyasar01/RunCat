@@ -94,8 +94,9 @@ public class CharacterMove : MonoBehaviour
         
         else if (Input.anyKey == false)
         {
-            // AnimationControl("Idle");
-            AnimationControl("Run");
+             //AnimationControl("Idle");
+            
+           AnimationControl("Run");
 
         }
         

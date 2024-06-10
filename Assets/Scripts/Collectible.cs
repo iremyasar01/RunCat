@@ -16,21 +16,24 @@ public class Collectible : MonoBehaviour
     }
     private void Update()
     {
-        if (cType == CollectibleType.Bones && player.GetComponent<Player>().IsMagnetActive == true && collected == false)
+        
+        if (cType == CollectibleType.Bones && collected == false)
         {
-            if ((transform.position.z - player.transform.position.z) < 2)
+            //if ((transform.position.z - player.transform.position.z) < 2)
             {
                 magneting = true;
-                StartCoroutine(ToParent());
+                //StartCoroutine(ToParent());
             }
         }
     }
     public IEnumerator ToParent()
     {
         collected = true;
-        transform.parent = player.transform.parent;
+       // transform.parent = player.transform.parent;
         transform.DOLocalMove(Vector3.zero + new Vector3(0, 1, 0), 0.2f).SetEase(Ease.Linear);
         yield return new WaitForSeconds(0.2f);
         Destroy(this.gameObject);
+    
+        
     }
 }
